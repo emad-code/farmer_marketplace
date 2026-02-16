@@ -1,6 +1,7 @@
 from rest_framework import generics, permissions
 from .models import Farm, Product
 from .serializers import FarmSerializer, ProductSerializer
+from .permissions import IsProductOwner
 
 
 # Create your views here.
@@ -37,12 +38,12 @@ class CreateProductView(generics.CreateAPIView):
 # UPDATE — Edit your product
 class UpdateProductView(generics.UpdateAPIView):
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsProductOwner]
     queryset = Product.objects.all()
 
 
 # DELETE — Remove product
 class DeleteProductView(generics.DestroyAPIView):
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsProductOwner]
     queryset = Product.objects.all()
