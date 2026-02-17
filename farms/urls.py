@@ -5,6 +5,9 @@ from .views import (
     CreateProductView,
     UpdateProductView,
     DeleteProductView,
+    PublicFarmListView,
+    FarmProductsView,
+    AllProductsView
 )
 
 urlpatterns = [
@@ -16,4 +19,9 @@ urlpatterns = [
     path("products/create/", CreateProductView.as_view()),
     path("products/<int:pk>/update/", UpdateProductView.as_view()),
     path("products/<int:pk>/delete/", DeleteProductView.as_view()),
+
+    # PUBLIC MARKETPLACE
+    path("farms/", PublicFarmListView.as_view()),
+    path("farms/<int:farm_id>/products/", FarmProductsView.as_view()),
+    path("products/all/", AllProductsView.as_view()),
 ]
