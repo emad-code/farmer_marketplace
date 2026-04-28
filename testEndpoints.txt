@@ -1,0 +1,72 @@
+######### AUTH APIs #########
+### REGISTER
+curl -X POST http://127.0.0.1:8000/api/auth/register/ \
+-H "Content-Type: application/json" \
+-d '{
+"username":"testuser",
+"email":"test@test.com",
+"password":"123456",
+"is_farmer": true
+}'
+
+### LOGIN
+curl -X POST http://127.0.0.1:8000/api/auth/login/ \
+-H "Content-Type: application/json" \
+-d '{"username":"testuser","password":"123456"}'
+
+
+####### FARM APIs ########
+### CREATE FARM
+curl -X POST http://127.0.0.1:8000/api/my-farm/ \
+-H "Authorization: Bearer YOUR_TOKEN" \
+-H "Content-Type: application/json" \
+-d '{"name":"My Farm","location":"London","description":"Organic farm"}'
+
+### GET FARM 
+curl http://127.0.0.1:8000/api/my-farm/ \
+-H "Authorization: Bearer YOUR_TOKEN"
+
+
+###### PRODUCT APIs ########
+### CREATE PRODUCT
+curl -X POST http://127.0.0.1:8000/api/products/create/ \
+-H "Authorization: Bearer YOUR_TOKEN" \
+-H "Content-Type: application/json" \
+-d '{"name":"Apples","description":"Fresh apples","price":"2.50","stock":100}'
+
+### LIST PRODUCTS 
+curl http://127.0.0.1:8000/api/products/ \
+-H "Authorization: Bearer YOUR_TOKEN"
+
+### UPDATE PRODUCTS
+curl -X PUT http://127.0.0.1:8000/api/products/1/update/ \
+-H "Authorization: Bearer YOUR_TOKEN" \
+-H "Content-Type: application/json" \
+-d '{"name":"Green Apples","description":"Very fresh","price":"3.00","stock":80}'
+
+### DELETE PRODUCTS
+curl -X DELETE http://127.0.0.1:8000/api/products/1/delete/ \
+-H "Authorization: Bearer YOUR_TOKEN"
+
+
+####### PUBLIC APIs (NO AUTH) ########
+### LIST PUBLIC PRODUCTS
+curl http://127.0.0.1:8000/api/products/all/
+
+### LIST ALL FARMS
+curl http://127.0.0.1:8000/api/farms/
+
+### LIST PROUCTS BY FARM
+curl http://127.0.0.1:8000/api/farms/1/products/
+
+
+####### ORDER APIs ########
+### CREATE ORDER
+curl -X POST http://127.0.0.1:8000/api/orders/create/ \
+-H "Authorization: Bearer YOUR_TOKEN" \
+-H "Content-Type: application/json" \
+-d '{"items":[{"product":1,"quantity":2}]}'
+
+### ORDER HISTORY
+curl http://127.0.0.1:8000/api/orders/ \
+-H "Authorization: Bearer YOUR_TOKEN"

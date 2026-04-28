@@ -9,7 +9,7 @@ User = settings.AUTH_USER_MODEL
 class Farm(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     location = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
 
